@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width"><!--From Foundation -->
+    <title>Simple Player</title>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" /><!--NOT From Foundation, remove it problems arise -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="../static/css/stylesheets/app.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/rdio-utils.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../static/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="../static/leaflet-0.6.4/leaflet.css"><!-- Remove if not needed -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,100' rel='stylesheet' type='text/css'>
+    <!-- Register your app at http://www.rdio.com/developers/create/ and replace client_id below with yours  -->
+    <script src="//www.rdio.com/api/api.js?client_id=g9i2ZgQIqpvP1dmguehIxw"></script>
+    <script src="../static/js/foundations_js_files/vendor/custom.modernizr.js"></script><!-- From Foundation -->
+    <!-- Remove if not needed<script src="../static/js/modernizr.touch.js"></script> -->
+    <script src="../static/js/underscore-1.4.4.min.js"></script><!-- Remove if not needed -->
+    <script src="../static/js/rdio-utils.js"></script>
+    <!-- Remove if not needed <script src="../static/js/main.js"></script> -->
+    <script src="../static/leaflet-0.6.4/leaflet.js"></script><!-- Remove if not needed -->
+    <script id="album-template" type="text/template">
+      <span class="album">
+        <div class="icon" style="background-image: url(<%= icon %>)">
+          <div class="buttons">
+            <span class="play btn">Play Album</span>
+          </div>          
+        </div>
+        <div class="title label"><%= name %></div>
+        <div class="artist label"><%= artist %></div>
+      </span>
+    </script>
+  </head>
+  <body>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <img src="../static/img/logo.png">
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-form">
+            <form>
+              <div class="row collapse">
+                <div class="small-8 columns">
+                  <input type="text">
+                </div>
+                <div class="small-4 columns">
+                  <a href="#" class="alert button">Search Yo' Beats</a>
+                </div>
+              </div>
+            </form>
+          </li>
+          <li><a href="#">Stephanie Horvilleur</a></li>
+          <li><a href="#"><img src="../static/img/steph-icon.jpg"></a></li>
+		  <li><a href="#"><img src="../static/img/facebook-icon.png"></a></li>
+		  <li><a href="#"><img src="../static/img/twitter-icon.png"></a></li>          
+        </ul>
+      </section>
+</nav>
+    
+    <div id="leftNav">
+        <div class="header">
+          <div class="section">
+            <img class="icon" id="playingIcon">
+            <div class="section" id="controls">
+              <button class="prev">&nbsp;</button>
+              <button class="play">&nbsp;</button>
+              <button class="next">&nbsp;</button>
+          </div>
+          </div>
+          <div class="section">
+            <div class="track label">Not Playing</div>
+            <div class="album-title label"></div>
+            <div class="artist label"></div>
+          </div>
+        </div>
+      <div class="results"></div>
+      <div id="myHood">
+        <p>MY HOOD</p>
+      </div>
+      <div id="chatText">
+        <p><span>Stephanie:</span>  Sup Tomest none of my hommiez like the Lovemakers want to go see them with me at the fox theater. 
+        <br>
+        <span>Tomest:</span> WHATTTT SUPPP GRRRULL YEEE I WANNA GO</p>
+      </div>
+      <div id="chat">
+        <p>WHAT UP &mdash; YO!</p>
+      </div>
+    </div>
+    <div id="test"></div>
+  <div id="mapArea">&nbsp;</div>
+    <!--<div id="map"></div>  -->
+    <!--Begin foundation scripts -->
+    <script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? '../static/js/foundations_js_files/vendor/zepto' : '../static/js/foundations_js_files/vendor/jquery') +
+  '.js><\/script>')
+  </script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.abide.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.alerts.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.clearing.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.cookie.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.dropdown.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.forms.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.interchange.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.joyride.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.magellan.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.orbit.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.placeholder.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.reveal.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.section.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.tooltips.js"></script>
+  
+  <script src="../static/js/foundations_js_files/foundation/foundation.topbar.js"></script>
+  
+  
+  <script>
+    $(document).foundation();
+  </script>
+  <!-- End Foundation Scripts -->
+
+  </body>
+</html>

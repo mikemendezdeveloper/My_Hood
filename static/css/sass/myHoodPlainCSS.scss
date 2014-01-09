@@ -1,0 +1,10 @@
+/* MyHood Plain CSS Overrides Includ this after all other files in myapp.scss */
+.has-form > form{
+	margin-top:10px;
+}
+.top-bar input, .top-bar .button{
+	height:45px;
+}
+.top-bar .button{
+	text-transform: uppercase;
+}
